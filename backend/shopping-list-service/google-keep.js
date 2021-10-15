@@ -9,16 +9,23 @@ async function addProductToList(productName, productCategory) {
     );
 
     if (error) {
-        console.log(`error: ${error.message}`);
+        console.log(`gkeep error: ${error.message}`);
         return;
     }
 
     if (stderr) {
-        console.log(`stderr: ${stderr}`);
+        console.log(`gkeep stderr: ${stderr}`);
         return;
     }
 
-    console.log(`stdout: ${stdout}`);
+    // all good when stdout length is zero
+    if (stdout.length === 0) {
+        console.log(
+            `Google Keep: Saved check item "${productName}" in note ${KEEP_NOTES_ID}.`
+        );
+    } else {
+        console.log(`gkeep stdout: ${stdout.length}`);
+    }
 }
 
 module.exports = addProductToList;

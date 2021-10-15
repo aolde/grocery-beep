@@ -6,7 +6,7 @@ WORKDIR /app
 RUN apt-get update || : && apt-get install python3 python3-pip -y
 RUN pip3 install -U gkeep==1.0.0 click==7.0
 
-COPY index.js package.json /app/
+COPY . /app/
 
 RUN yarn --frozen-lockfile
 

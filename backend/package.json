@@ -1,0 +1,14 @@
+{
+    "name": "grocery-beep",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "got": "^11.8.2",
+        "mqtt": "^4.2.8"
+    }
+}

@@ -21,6 +21,7 @@ void BarcodeReader::setup() {
 }
 
 void BarcodeReader::loop() {
+  // trigger button is pressed (LOW)
   if (digitalRead(39) == LOW) {
     digitalWrite(BARCODE_TRIGGER_PIN, LOW);
   } else {

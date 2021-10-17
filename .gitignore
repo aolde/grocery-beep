@@ -7,3 +7,5 @@
 node_modules
 auth.json
 .env
+
+.DS_Store

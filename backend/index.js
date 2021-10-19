@@ -1,8 +1,11 @@
 require("dotenv").config();
 
 const mqtt = require("mqtt");
-const resolveProduct = require("./product-resolver/coop");
+const coop = require("./product-resolver/coop");
+const openFoodFacts = require("./product-resolver/openFoodFacts");
 const addProductToList = require("./shopping-list-service/google-keep");
+
+const productResolvers = [coop, openFoodFacts];
 
 console.log("Connecting to MQTT server...");
 
@@ -66,3 +69,22 @@ client.on("message", async function (topic, message) {
 process.on("SIGINT", function () {
     client.end();
 });
+
+async function resolveProduct(barcode, resolverIndex = 0) {
+    if (resolverIndex >= 0 && resolverIndex < productResolvers.length) {
+        try {
+            const product = await productResolvers[resolverIndex](barcode);
+            console.log("Resolver ", resolverIndex, product);
+
+            if (product === null) {
+                return await resolveProduct(barcode, resolverIndex + 1);
+            }
+            return product;
+        } catch (error) {
+            console.log("Resolver threw error", resolverIndex, errror);
+            return await resolveProduct(barcode, resolverIndex + 1);
+        }
+    } else {
+        return null;
+    }
+}

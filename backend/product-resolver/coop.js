@@ -25,7 +25,7 @@ async function resolveProduct(barcode) {
         throw Error(
             "Could not resolve product from barcode " +
                 barcode +
-                " with resolver 'coop.js'. Status code: " +
+                " with resolver 'coop'. Status code: " +
                 response.statusCode
         );
     }
